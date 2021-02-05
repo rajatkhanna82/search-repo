@@ -127,10 +127,10 @@ const useStyles = makeStyles((theme) => ({
 	// Fetching Data 
 	const [getUsername, {loading, error, data}] = useLazyQuery(GET_REPOS)
 
+	// Dark Theme switching login
 	const handleThemeChange = ()=> {
 		setDarkState(!darkState)
 	}
-
   const darkTheme = createMuiTheme({
     palette: {
       type: palletType,
@@ -141,7 +141,9 @@ const useStyles = makeStyles((theme) => ({
         main: mainSecondaryColor
       }
     }
-  });
+	});
+	
+	
 		return (
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline/>
