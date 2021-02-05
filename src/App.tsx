@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import {ApolloClient, ApolloProvider, from, HttpLink, InMemoryCache} from '@apollo/client'
+import {onError} from '@apollo/client/link/error'
 import './App.css';
+import Search from './components/search'
+
+// Create Error link for Graphyql error handling
+const errorLink = onError(({graphQLErrors})=> {
+  if(graphQLErrors){
+    graphQLErrors.map(({ message})=> {
+      alert(`Graphql Error ${message}`)
+      return null
+    })
+  }
+})
+
+// Global Personal Access Token to be added as EVN variable or in the .env file.
+const TOKEN = process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
+
+//Github Personal Access Token to be added as EVN variable or 
+const link = from([
+  errorLink,
+  new HttpLink({uri: 'https://api.github.com/graphql',headers: {authorization: `Bearer ${TOKEN}`}}),
+])
+// Apollo client for graphql queris
+const client = new ApolloClient({
+  link: link,
+  cache: new InMemoryCache()
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <Search></Search>
+      </div>
+    </ApolloProvider>
   );
 }
 
