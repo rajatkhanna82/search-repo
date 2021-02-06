@@ -4,7 +4,7 @@ import Search from "./Search";
 
 test("Render Search Bar", () => {
   render(<Search />);
-  screen.findByPlaceholderText("Search...");
+  screen.findByPlaceholderText("Enter Github Username...");
   screen.findByText("Search GitHub Repos");
 });
 

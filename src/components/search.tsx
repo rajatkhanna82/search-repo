@@ -93,17 +93,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   inputRoot: {
-    color: "inherit"
+    color: "inherit",
+    display: "flex"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch"
-    }
+    width: "auto",
+    flexGrow: 1
   },
   container: {
     paddingTop: theme.spacing(10),
@@ -165,7 +164,7 @@ function Search() {
                   <SearchIcon />
                 </div>
                 <InputBase
-                  placeholder='Search…'
+                  placeholder='Enter Github Username...'
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput
