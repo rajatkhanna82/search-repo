@@ -1,14 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import Search from "./Search";
 
 test("Render Search Bar", () => {
-  render(<App />);
+  render(<Search />);
   screen.findByPlaceholderText("Search...");
   screen.findByText("Search GitHub Repos");
 });
 
 test("Render Darkmode switch ", () => {
-  render(<App />);
+  render(<Search />);
   screen.findAllByRole("checkbox");
 });
